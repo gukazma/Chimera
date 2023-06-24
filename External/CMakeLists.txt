@@ -5,3 +5,4 @@ include(CPM) # keep 1-st
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.6.0")
 
 include(googletest)
+include(glfw)
