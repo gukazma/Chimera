@@ -2,7 +2,7 @@
  * @Author       : gukazma && gukazma@proton.me
  * @Date         : 2023-06-24 14:39:17
  * @FilePath     :
- * \CppTemplateProject\Modules\Common\PrecompiledHeaders\Sources\LibName\PrecompiledHeaders.cpp
+ * \CppTemplateProject\Modules\Common\PrecompiledHeaders\Sources\Chimera\PrecompiledHeaders.cpp
  * @Description  :
  * MIT License
  *
@@ -19,7 +19,7 @@
  *
  *
  */
-namespace LibName::PrecompiledHeaders {
+namespace Chimera::PrecompiledHeaders {
 
 void Dummy()
 {
@@ -27,4 +27,4 @@ void Dummy()
     // the table of contents is empty (no object file members in the library define global symbols)
 }
 
-}   // namespace LibName::PrecompiledHeaders
+}   // namespace Chimera::PrecompiledHeaders

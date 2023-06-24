@@ -1,7 +1,7 @@
 /*
  * @Author       : gukazma && gukazma@proton.me
  * @Date         : 2023-06-24 14:39:17
- * @FilePath     : \CppTemplateProject\Modules\Common\Primitives\Include\LibName\Timer.hpp
+ * @FilePath     : \CppTemplateProject\Modules\Common\Primitives\Include\Chimera\Timer.hpp
  * @Description  : The Timer class uses the high-resolution clock from the C++ standard library to
  * measure elapsed time MIT License
  *
@@ -22,7 +22,7 @@
 
 #include <chrono>
 
-namespace LibName {
+namespace Chimera {
 
 class Timer
 {
@@ -68,4 +68,4 @@ private:
     TimePoint m_start_time = Clock::now();
 };
 
-}   // namespace LibName
+}   // namespace Chimera

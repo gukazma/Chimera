@@ -36,6 +36,7 @@ Qt5::Gui
 Qt5::Widgets
 Qt5::OpenGL
 Vulkan::Vulkan
+Vulkan::Headers
 )
 
 target_include_directories(

@@ -1,7 +1,7 @@
 /*
  * @Author       : gukazma && gukazma@proton.me
  * @Date         : 2023-06-24 14:39:17
- * @FilePath     : \CppTemplateProject\Modules\Common\Primitives\Sources\LibName\Primitives.cpp
+ * @FilePath     : \CppTemplateProject\Modules\Common\Primitives\Sources\Chimera\Primitives.cpp
  * @Description  :
  * MIT License
  *
@@ -18,7 +18,7 @@
  *
  *
  */
-namespace LibName::Primitives {
+namespace Chimera::Primitives {
 
 void Dummy()
 {
@@ -26,4 +26,4 @@ void Dummy()
     // the table of contents is empty (no object file members in the library define global symbols)
 }
 
-}   // namespace LibName::Primitives
+}   // namespace Chimera::Primitives
