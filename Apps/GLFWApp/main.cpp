@@ -18,29 +18,43 @@
  *
  *
  */
+#include <Chimera/Vulkan/Instance.h>
+#include <Chimera/Vulkan/WindowData.h>
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.hpp>
 
+std::vector<const char*> getRequiredExtensions()
+{
+    uint32_t     glfwExtensionCount = 0;
+    const char** glfwExtensions;
+    glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+    std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+
+#ifndef NDEBUG
+    extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+#endif   // !NDEBUG
+
+    return extensions;
+}
 int main(int argc, char** argv)
 {
-    GLFWwindow* window;
+    Chimera::Vulkan::WindowData windowdata =
+        Chimera::Vulkan::WindowData::createWindow("Chimera", {600, 400});
+    Chimera::Vulkan::Instance instance;
 
-    /* Initialize the library */
-    if (!glfwInit()) return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Chimera", NULL, NULL);
-    if (!window) {
+    if (!windowdata.handle) {
         glfwTerminate();
         return -1;
     }
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(windowdata.handle);
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(windowdata.handle)) {
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(windowdata.handle);
 
         /* Poll for and process events */
         glfwPollEvents();

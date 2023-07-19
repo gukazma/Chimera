@@ -1,5 +1,4 @@
 set(TARGET_NAME GLFWApp)
-find_package(Vulkan REQUIRED)
 
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -21,8 +20,7 @@ target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:
 
 target_link_libraries(${TARGET_NAME} PRIVATE 
 ${PROJECT_NAME}::Primitives
-Vulkan::Vulkan
-glfw
+${PROJECT_NAME}::Vulkan
 )
 
 target_include_directories(
