@@ -7,7 +7,7 @@ namespace Vulkan {
 struct WindowData
 {
     static WindowData createWindow(std::string const& windowName, vk::Extent2D const& extent);
-
+    WindowData() = default;
     WindowData(GLFWwindow* wnd, std::string const& name, vk::Extent2D const& extent);
     WindowData(const WindowData&) = delete;
     WindowData(WindowData&& other);
