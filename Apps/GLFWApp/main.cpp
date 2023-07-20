@@ -19,42 +19,25 @@
  *
  */
 #include <Chimera/Vulkan/Instance.h>
-#include <Chimera/Vulkan/WindowData.h>
+#include <Chimera/Vulkan/SurfaceData.h>
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.hpp>
-
-std::vector<const char*> getRequiredExtensions()
-{
-    uint32_t     glfwExtensionCount = 0;
-    const char** glfwExtensions;
-    glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-    std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-
-#ifndef NDEBUG
-    extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-#endif   // !NDEBUG
-
-    return extensions;
-}
 int main(int argc, char** argv)
 {
-    Chimera::Vulkan::WindowData windowdata =
-        Chimera::Vulkan::WindowData::createWindow("Chimera", {600, 400});
-    Chimera::Vulkan::Instance instance;
+    Chimera::Vulkan::Instance& instance = Chimera::Vulkan::Instance::getInstance();
 
-    if (!windowdata.handle) {
+    if (!instance.m_surfacedata->m_window.handle) {
         glfwTerminate();
         return -1;
     }
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(windowdata.handle);
+    glfwMakeContextCurrent(instance.m_surfacedata->m_window.handle);
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(windowdata.handle)) {
+    while (!glfwWindowShouldClose(instance.m_surfacedata->m_window.handle)) {
         /* Swap front and back buffers */
-        glfwSwapBuffers(windowdata.handle);
+        glfwSwapBuffers(instance.m_surfacedata->m_window.handle);
 
         /* Poll for and process events */
         glfwPollEvents();

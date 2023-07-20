@@ -1,19 +1,24 @@
 #pragma once
-#include <Chimera/Vulkan/SurfaceData.h>
+#include <memory>
 #include <vulkan/vulkan.hpp>
 namespace Chimera {
 namespace Vulkan {
+class SurfaceData;
+class Device;
 class Instance
 {
 public:
-    Instance();
-
-    vk::Device createDefaultDevice();
+    static Instance&        getInstance();
+    vk::Device              createGraphicNativeDevice();
+    std::shared_ptr<Device> createGraphicDevice();
 
 public:
-    vk::Instance       m_nativeInstance;
-    vk::PhysicalDevice m_physicalDevice;
-    SurfaceData        m_surfacedata;
+    Instance();
+    Instance(const Instance&)                                     = delete;
+    Instance&                    operator=(const Instance& other) = delete;
+    vk::Instance                 m_nativeInstance;
+    vk::PhysicalDevice           m_physicalDevice;
+    std::shared_ptr<SurfaceData> m_surfacedata;
 };
 }   // namespace Vulkan
 }   // namespace Chimera

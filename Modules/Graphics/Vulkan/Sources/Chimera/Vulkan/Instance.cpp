@@ -1,5 +1,8 @@
+#include <Chimera/Vulkan/Device.h>
 #include <Chimera/Vulkan/Instance.h>
+#include <Chimera/Vulkan/SurfaceData.h>
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.hpp>
 namespace Chimera {
 namespace Vulkan {
 std::vector<const char*> getRequiredExtensions()
@@ -106,14 +109,28 @@ Instance::Instance()
 
     // create an Instance
     m_nativeInstance = vk::createInstance(instanceCreateInfo);
+    m_surfacedata =
+        std::make_shared<SurfaceData>(m_nativeInstance, "Chimera", vk::Extent2D(500, 500));
 }
-vk::Device Instance::createDefaultDevice()
+Instance& Instance::getInstance()
+{
+    static Instance s_instance;
+    return s_instance;
+}
+vk::Device Instance::createGraphicNativeDevice()
 {
     vk::PhysicalDevice physicalDevice = m_nativeInstance.enumeratePhysicalDevices().front();
+    SurfaceData        surfacedata;
     std::pair<uint32_t, uint32_t> graphicsAndPresentQueueFamilyIndex =
-        findGraphicsAndPresentQueueFamilyIndex(physicalDevice, m_surfacedata.m_surface);
+        findGraphicsAndPresentQueueFamilyIndex(physicalDevice, m_surfacedata->m_surface);
     vk::Device device = createDevice(
         physicalDevice, graphicsAndPresentQueueFamilyIndex.first, getDeviceExtensions());
+    return device;
+}
+std::shared_ptr<Device> Instance::createGraphicDevice()
+{
+    vk::Device              nativeDevice = createGraphicNativeDevice();
+    std::shared_ptr<Device> device       = std::make_shared<Device>(nativeDevice);
     return device;
 }
 }   // namespace Vulkan
