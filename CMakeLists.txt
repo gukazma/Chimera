@@ -9,7 +9,7 @@ if (NOT CMAKE_BUILD_TYPE)
     message(STATUS "No CMAKE_BUILD_TYPE selected, defaulting to ${CMAKE_BUILD_TYPE}")
 endif ()
 
-project(CppTemplateProject VERSION 0.1 LANGUAGES CXX)
+project(Chimera VERSION 0.1 LANGUAGES CXX)
 
 include(CMakeModules/conan.cmake)
 if (CONAN_PROFILE_BUILD AND CONAN_PROFILE_HOST)
@@ -60,6 +60,9 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
       "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
 endif()
+
+
+find_package(OpenMVG REQUIRED CONFIG)
 
 add_subdirectory(Modules)
 add_subdirectory(Apps)

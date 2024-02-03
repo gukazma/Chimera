@@ -1,21 +1,23 @@
-#include "MainWindow.h"
+// This file is part of OpenMVG, an Open Multiple View Geometry C++ library.
+
+// Copyright (c) 2017 Romuald Perrot.
+
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+#include "MainWindow.hpp"
+
 #include <QApplication>
-#include <QSplashScreen>
-#include <QTranslator>
-int main(int argc, char** argv)
+
+using namespace features_pair_demo;
+
+int main( int argc, char **argv )
 {
-    QApplication  app(argc, argv);
-    QPixmap       pixmap(QString::fromLocal8Bit(":/mgukazma.jpg"));
-    QSplashScreen splash(pixmap);
-    splash.show();
+  QApplication app( argc, argv );
 
-    QTranslator* translator = new QTranslator;
-    translator->load(":/Translations/zh_CN.qm");
-    app.installTranslator(translator);
+  MainWindow win;
+  win.show();
 
-    MainWindow mainwindow;
-    mainwindow.showMaximized();
-
-    splash.finish(&mainwindow);
-    return app.exec();
+  return app.exec();
 }

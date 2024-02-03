@@ -6,10 +6,12 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
-file(GLOB_RECURSE CPP_HEAD_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
-file(GLOB_RECURSE CPP_SOUCE_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB_RECURSE HEADER_FILES "*.h")
+file(GLOB_RECURSE HPP_FILES "*.hpp")
+file(GLOB_RECURSE CPP_FILES "*.cpp")
 file(GLOB_RECURSE UI_SOUCE_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.ui)
+
+
 set(QRC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/QResources/resources.qrc)
 set(APPRC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/QResources/appicon.rc)
 set(Translatefile ${CMAKE_CURRENT_SOURCE_DIR}/QResources/Translations/zh_CN.ts)
@@ -17,13 +19,21 @@ set(Translatefile ${CMAKE_CURRENT_SOURCE_DIR}/QResources/Translations/zh_CN.ts)
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES})
 
-add_executable(${TARGET_NAME} ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES} ${UI_SOUCE_FILES}  ${QRC_FILE} ${APPRC_FILE} ${Translatefile})
+add_executable(${TARGET_NAME} ${HEADER_FILES} ${HPP_FILES} ${CPP_FILES} ${UI_SOUCE_FILES} ${QRC_FILE} ${APPRC_FILE} ${Translatefile})
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Apps)
 target_link_libraries(${TARGET_NAME} PRIVATE
 Qt5::Core
 Qt5::Gui
 Qt5::Widgets
 Qt5::OpenGL
+OpenMVG::openMVG_geometry
+OpenMVG::openMVG_linearProgramming
+OpenMVG::openMVG_multiview
+OpenMVG::openMVG_numeric
+OpenMVG::openMVG_features
+OpenMVG::openMVG_image
+OpenMVG::openMVG_matching
+vlsift
 )
 
 if(MSVC)
