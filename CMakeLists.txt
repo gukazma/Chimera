@@ -63,6 +63,12 @@ endif()
 
 
 find_package(OpenMVG REQUIRED CONFIG)
+find_package(OpenMP REQUIRED)
+# 如果找到OpenMP，则启用它
+if(OpenMP_CXX_FOUND)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
 
 add_subdirectory(Modules)
 add_subdirectory(Apps)

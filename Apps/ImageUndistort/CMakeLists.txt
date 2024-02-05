@@ -32,6 +32,7 @@ OpenMVG::openMVG_features
 OpenMVG::openMVG_image
 OpenMVG::openMVG_matching
 vlsift
+OpenMP::OpenMP_CXX
 )
 
 if(MSVC)

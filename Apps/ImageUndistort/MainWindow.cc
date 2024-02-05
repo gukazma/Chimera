@@ -132,7 +132,7 @@ void MainWindow::onProcessImage( void )
     }
     }
 
-    openMVG::cameras::UndistortImageResized( m_inputImage, intrin, m_outputImage );
+    openMVG::cameras::UndistortImage( m_inputImage, intrin, m_outputImage );
 
     QImage tmp = openMVGImageToQImage( m_outputImage );
 
