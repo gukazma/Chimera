@@ -1,2 +1,3 @@
 add_subdirectory(FeatureMatch)
 add_subdirectory(ImageUndistort)
+add_subdirectory(VisualizeSfmData)
