@@ -67,3 +67,5 @@ add_custom_target(
 
 set_target_properties(TranslateUpdate PROPERTIES FOLDER Apps)
 set_target_properties(TranslateRelease PROPERTIES FOLDER Apps)
+
+add_dependencies(${TARGET_NAME} ChimeraEngine)
