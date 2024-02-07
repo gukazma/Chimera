@@ -67,7 +67,7 @@ if(ENABLE_DEBUG)
   if(MSVC)
   # 使用 /O2 开启优化, /Zi 开启调试信息
   # 使用 /O2 开启优化, /Zi 开启调试信息
-  set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Zi")
+  set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Zi /Ob1")
 
   # 在链接阶段生成调试信息
   set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG")
