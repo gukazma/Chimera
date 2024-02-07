@@ -1,3 +1,4 @@
 add_subdirectory(Chimera)
+add_subdirectory(ChimeraEngine)
 add_subdirectory(ImageUndistort)
 add_subdirectory(VisualizeSfmData)
