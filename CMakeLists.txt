@@ -36,6 +36,7 @@ conan_basic_setup(TARGETS)
 
 
 option(ENABLE_DOCS "Enable doxygen docs" ON)
+option(ENABLE_DEBUG "Enable debug" ON)
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -60,6 +61,21 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     FATAL_ERROR
       "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
+endif()
+
+if(ENABLE_DEBUG)
+  if(MSVC)
+  # 使用 /O2 开启优化, /Zi 开启调试信息
+  # 使用 /O2 开启优化, /Zi 开启调试信息
+  set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Zi")
+
+  # 在链接阶段生成调试信息
+  set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG")
+  set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG")
+  else()
+  # 对于其他编译器, 使用 -O2 开启优化, -g 开启调试信息
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -g")
+  endif()
 endif()
 
 
