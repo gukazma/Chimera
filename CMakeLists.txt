@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 # 设置基础环境
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+cmake_policy(SET CMP0100 NEW)
 
 # 设置默认的编译配置为 Debug，conan.cmake 需要确定你当前正在使用哪种编译配置以决定如何下载和编译三方库
 if (NOT CMAKE_BUILD_TYPE)
@@ -79,7 +80,7 @@ if(ENABLE_DOCS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../Docs)
   build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Docs/Doxyfile.in)
 endif()
-set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT DemoApp)
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT Chimera)
 
 if(CLANG_FORMAT_EXE)
   message(STATUS "Found clang format ............ Configuring ..............")

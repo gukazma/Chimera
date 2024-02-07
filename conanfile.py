@@ -8,7 +8,6 @@ class ModuleConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake", "cmake_find_package_multi", "cmake_paths"
 
-
     def configure(self):
         del self.settings.compiler.cppstd
 
