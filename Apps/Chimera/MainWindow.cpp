@@ -29,6 +29,7 @@
 
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/qt_sinks.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 using namespace openMVG::image;
 using namespace openMVG::features;
@@ -498,9 +499,13 @@ void MainWindow::BuildInterface()
   auto log_widget = new QTextEdit(this);
   setCentralWidget(log_widget);
   int  max_lines = 500;   // keep the text widget to max 500 lines. remove old lines if needed.
-  auto logger    = spdlog::qt_color_logger_mt("qt_logger", log_widget, max_lines);
-  logger->info("Some info message");
+  auto qtlogger     = std::make_shared < spdlog::sinks::qt_color_sink_mt>(log_widget, max_lines);
+  auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
+  spdlog::logger logger("multi_sink", {qtlogger, console_sink});
+  logger.set_level(spdlog::level::debug);
+  logger.warn("this should appear in both console and file");
+  logger.info("this message should not appear in the console, only in the file");
 
   // Add everything to the window
   QVBoxLayout *mainLayout = new QVBoxLayout;
