@@ -15,6 +15,7 @@ class ModuleConan(ConanFile):
     def requirements(self):
         self.requires("gtest/1.14.0")
         self.requires("openmvg/2.0")
+        self.requires("spdlog/1.13.0")
         
     def imports(self):
         self.copy("*.dll", "./bin", "bin")

@@ -27,6 +27,9 @@
 #include <memory>
 #include <random>
 
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/qt_sinks.h"
+
 using namespace openMVG::image;
 using namespace openMVG::features;
 using namespace openMVG::matching;
@@ -489,8 +492,15 @@ void MainWindow::BuildInterface()
   resultLayout->addWidget( m_view );
 
   groupResult->setLayout( resultLayout );
-
   m_exportResult = new QPushButton( "Export image" );
+
+
+  auto log_widget = new QTextEdit(this);
+  setCentralWidget(log_widget);
+  int  max_lines = 500;   // keep the text widget to max 500 lines. remove old lines if needed.
+  auto logger    = spdlog::qt_color_logger_mt("qt_logger", log_widget, max_lines);
+  logger->info("Some info message");
+
 
   // Add everything to the window
   QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -498,7 +508,10 @@ void MainWindow::BuildInterface()
   mainLayout->addWidget( groupMatching );
   mainLayout->addWidget( groupProcessing );
   mainLayout->addWidget( groupResult );
-  mainLayout->addWidget( m_exportResult );
+  mainLayout->addWidget(m_exportResult);
+  mainLayout->addWidget(log_widget);
+
+  
 
   QWidget *dummyWidget = new QWidget;
   dummyWidget->setLayout( mainLayout );
