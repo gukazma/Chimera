@@ -1,4 +1,4 @@
-set(TARGET_NAME FeatureMatch)
+set(TARGET_NAME Chimera)
 
 find_package(Qt5 COMPONENTS Core Widgets Gui OpenGL REQUIRED)
 

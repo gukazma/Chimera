@@ -1,3 +1,3 @@
-add_subdirectory(FeatureMatch)
+add_subdirectory(Chimera)
 add_subdirectory(ImageUndistort)
 add_subdirectory(VisualizeSfmData)
