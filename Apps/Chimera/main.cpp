@@ -6,11 +6,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "MainWindow.hpp"
+#include "MainWindow.h"
 
 #include <QApplication>
 
-using namespace features_pair_demo;
 
 int main( int argc, char **argv )
 {
