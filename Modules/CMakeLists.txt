@@ -1,3 +1,2 @@
 add_subdirectory(Common)
 add_subdirectory(nonFree)
-add_subdirectory(rerun_cpp_sdk)
