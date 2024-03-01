@@ -86,7 +86,7 @@ if(OpenMP_CXX_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 find_package(spdlog REQUIRED CONFIG)
-
+find_package(Boost REQUIRED)
 
 add_subdirectory(Modules)
 add_subdirectory(Apps)
