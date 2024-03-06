@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="/">
     <file>Translations/zh_CN.qm</file>
+    <file>Icons/icons8_sphere_16.png</file>
+    <file>Icons/icons8_sphere_get_16.png</file>
     <file>mgukazma.jpg</file>
   </qresource>
 </RCC>

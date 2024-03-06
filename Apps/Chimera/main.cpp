@@ -7,16 +7,21 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "MainWindow.h"
+#include "Engine/UDPServer.h"
 
 #include <QApplication>
 
 
 int main( int argc, char **argv )
 {
-  QApplication app( argc, argv );
+	boost::asio::io_context io_context;
+	UDPServer                server(io_context, 25557, [](Engine) {});
 
-  MainWindow win;
-  win.show();
+    io_context.run();
 
-  return app.exec();
+	/*QApplication app( argc, argv );
+
+	MainWindow win;
+	win.show();
+	return app.exec();*/
 }

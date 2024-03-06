@@ -35,6 +35,10 @@ OpenMVG::openMVG_image
 OpenMVG::openMVG_matching
 vlsift
 spdlog::spdlog
+Boost::system
+Boost::filesystem
+Boost::dynamic_linking
+Boost::thread
 )
 
 if(MSVC)
@@ -45,10 +49,11 @@ add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
   COMMENT "Deploying qt dependencies after build..."
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
-
+if(NOT ENABLE_DEBUG)
 set_target_properties(${TARGET_NAME} PROPERTIES
 LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
 )
+endif()
 endif()
 
 
