@@ -1,45 +1,22 @@
-//
-// server.cpp
-// ~~~~~~~~~~
-//
-// Copyright (c) 2003-2023 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
-#include <array>
 #include <boost/asio.hpp>
-#include <ctime>
 #include <iostream>
-#include <string>
 
 using boost::asio::ip::udp;
-
-std::string make_daytime_string()
-{
-    using namespace std;   // For time_t, time and ctime;
-    time_t now = time(0);
-    return ctime(&now);
-}
 
 int main()
 {
     try {
         boost::asio::io_context io_context;
 
-        udp::socket socket(io_context, udp::endpoint(udp::v4(), 25557));
+        udp::socket socket(io_context, udp::endpoint(udp::v4(), 0));
+        socket.set_option(udp::socket::broadcast(true));
 
-        for (;;) {
-            std::array<char, 1> recv_buf;
-            udp::endpoint       remote_endpoint;
-            socket.receive_from(boost::asio::buffer(recv_buf), remote_endpoint);
+        udp::endpoint broadcast_endpoint(boost::asio::ip::address_v4::broadcast(), 25557);
 
-            std::string message = make_daytime_string();
+        std::string message = "Hello, this is a broadcast message!";
+        socket.send_to(boost::asio::buffer(message), broadcast_endpoint);
 
-            boost::system::error_code ignored_error;
-            socket.send_to(boost::asio::buffer(message), remote_endpoint, 0, ignored_error);
-        }
+        std::cout << "Message sent: " << message << std::endl;
     }
     catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
